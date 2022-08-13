@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Distort Content On Scroll</title>
+        <link rel="stylesheet" href="main.css" />
+    </head>
+    <body>
+        <div class="smooth-scroll-wrapper">
+            <div class="content">
+                <section>
+                    <div>
+                        <img src="pic1.png" />
+                        <h1>Ms. Kranti Vartak</h1>
+                        <p>
+                            The class Co-ordinator of SY CS. Well disciplined, punctual and polite teacher and friend too
+                            her teaching implements multiple fun-learning techniques to make the subject more easy to understand
+                        </p>
+                    </div>
+                    <div>
+                        <img src="pic2.png" />
+                        <h1>Shruti Patil</h1>
+                        <p>
+                            The DR of Whole CS batch and student council member performing her role with great responsibility
+                        </p>
+                    </div>
+                    <div>
+                        <img src="pic3.png" />
+                        <h1>Ketan Patil</h1>
+                        <p>
+                            The official CR of SY CS class having great communication and team-work skills to represent the 
+                            class and maintaining the discipline 
+                        </p>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+        <script>
+            const body = document.body,
+                scrollWrap = document.getElementsByClassName("smooth-scroll-wrapper")[0],
+                height = scrollWrap.getBoundingClientRect().height - 1,
+                speed = 0.04;
+
+            var offset = 0;
+
+            body.style.height = Math.floor(height) + "px";
+
+            function smoothScroll() {
+                offset += (window.pageYOffset - offset) * speed;
+
+                var scroll = "translateY(-" + offset + "px) translateZ(0)";
+                scrollWrap.style.transform = scroll;
+
+                callScroll = requestAnimationFrame(smoothScroll);
+            }
+
+            smoothScroll();
+            const content = document.querySelector("section");
+            let currentPos = window.pageYOffset;
+
+            const callDistort = function () {
+                const newPos = window.pageYOffset;
+                const diff = newPos - currentPos;
+                const speed = diff * 0.35;
+
+                content.style.transform = "skewY(" + speed + "deg)";
+                currentPos = newPos;
+                requestAnimationFrame(callDistort);
+            };
+
+            callDistort();
+        </script>
+    </body>
+</html>
